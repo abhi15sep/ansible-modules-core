@@ -62,7 +62,7 @@ options:
     required: false
     choices: [ Yes, No ]
     default: Yes
-    version_added: "2.1"
+    version_added: "2.3"
     aliases: [ 'mime', 'mime_type', 'mime-type' ]
   get_attributes:
     description:

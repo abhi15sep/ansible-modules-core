@@ -149,9 +149,12 @@ def make_rule_key(prefix, rule, group_id, cidr_ip):
     else:  # isinstance boto.ec2.securitygroup.IPPermissions
         proto, from_port, to_port = [getattr(rule, x, None) for x in ('ip_protocol', 'from_port', 'to_port')]
 
-    key = "%s-%s-%s-%s-%s-%s" % (prefix, proto, from_port, to_port, group_id, cidr_ip)
+    key = "%s-%s-%s-%s-%s-%s" % (prefix, proto, to_int_safe(from_port), to_int_safe(to_port), group_id, cidr_ip)
     return key.lower().replace('-none', '-None')
 
+
+def to_int_safe(str):
+    return int(str) if str else None
 
 def addRulesToLookup(rules, prefix, dict):
     for rule in rules:
